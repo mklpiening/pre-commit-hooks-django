@@ -11,5 +11,8 @@ def get_untracked_files() -> List[str]:
 
 
 def get_current_branch() -> str:
-    output = subprocess.check_output(BRANCH_CMD)
-    return output.decode().rstrip()
+    try:
+        output = subprocess.check_output(BRANCH_CMD)
+        return output.decode().rstrip()
+    except subprocess.CalledProcessError:
+        return None
